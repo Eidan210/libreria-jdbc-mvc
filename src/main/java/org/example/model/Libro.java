@@ -1,3 +1,3 @@
 package org.example.model;
 
-public record Libro(int id, String titulo, String autor, Double precio) { }
+public record Libro(int id, String titulo, String autor, double precio) { }

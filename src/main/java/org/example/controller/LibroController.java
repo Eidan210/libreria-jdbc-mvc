@@ -16,15 +16,8 @@ public class LibroController {
     }
 
     public void registrar(String titulo, String autor, double precio) {
-        if(titulo == null || titulo.isBlank()){
-            view.mensaje("No contiene titulo valido");
-            return;
-        }
 
-        if(precio <= 0){
-            view.mensaje("El precio debe ser mayor a 0");
-            return;
-        }
+        if(!datosValidos(titulo, autor, precio)) return;
 
         try {
             Libro libro = new Libro(0, titulo,autor,precio);
@@ -56,4 +49,71 @@ public class LibroController {
         }
     }
 
+    // --- Ayudantes privados ---
+
+    private boolean datosValidos(String titulo, String autor, double precio){
+        if(titulo == null || titulo.isBlank()){
+            view.mensaje("No contiene titulo valido");
+            return false;
+        }
+
+        if(precio <= 0){
+            view.mensaje("El precio debe ser mayor a 0");
+            return false;
+        }
+
+        if(autor == null || autor.isBlank()){
+            view.mensaje("Debes ingresar un Autor");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean idValido(int id){
+        if(id <= 0) {
+            view.mensaje("Debes ingresar un ID");
+            return false;
+        }
+        return true;
+    }
+
+    // --- Final de Ayudantes privados ---
+
+    public void actualizar(int id, String titulo, String autor, double precio) {
+
+        if(!idValido(id)) return;
+
+        if(!datosValidos(titulo,autor,precio)) return;
+
+        try {
+            Libro libro = new Libro(id, titulo,autor,precio);
+            int filas = dao.actualizar(libro);
+
+            if(filas == 0){
+                view.mensaje("No existe un libro con id "+ id);
+            } else {
+                view.mensaje("Libro actualizado exitosamente: "+titulo);
+            }
+
+        }catch (SQLException e){
+            view.mensaje("Error al actualizar el libro "+e.getMessage());
+        }
+    }
+
+    public void eliminar(int id) {
+        if(!idValido(id)) return;
+
+        try{
+            int filas = dao.eliminar(id);
+
+            if(filas == 0){
+                view.mensaje("No existe el libro con id "+ id);
+            } else {
+                view.mensaje("Libro eliminado exitosamente: "+id);
+            }
+
+        } catch (SQLException e){
+            view.mensaje("Error al eliminar el libro "+e.getMessage());
+        }
+    }
 }

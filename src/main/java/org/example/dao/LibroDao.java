@@ -12,7 +12,7 @@ import java.util.List;
 public class LibroDao {
     private static final String URL = "jdbc:mysql://localhost:3306/libreria";
     private static final String USER = "root";
-    private static final String PASS = System.getenv().getOrDefault("DB_PASS", "cambiar");
+    private static final String PASS = System.getenv().getOrDefault("DB_PASS", "Cambiar.");
 
     private Connection conectar() throws SQLException {
         return DriverManager.getConnection(URL,USER,PASS);
@@ -76,5 +76,30 @@ public class LibroDao {
             }
         }
         return libros;
+    }
+
+    public int actualizar(Libro libro) throws SQLException {
+        String sql = "UPDATE libro set titulo = ?, autor = ?, precio = ? WHERE id = ? ";
+
+        try(Connection con = conectar();
+            PreparedStatement ps = con.prepareStatement(sql)){
+            ps.setString(1, libro.titulo());
+            ps.setString(2, libro.autor());
+            ps.setDouble(3, libro.precio());
+            ps.setInt(4, libro.id());
+
+            return ps.executeUpdate();
+        }
+    }
+
+    public int eliminar(int id)throws SQLException{
+        String sql = "DELETE FROM libro WHERE id = ?";
+
+        try(Connection con = conectar();
+            PreparedStatement ps = con.prepareStatement(sql)){
+
+            ps.setInt(1,id);
+            return ps.executeUpdate();
+        }
     }
 }
