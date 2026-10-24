@@ -1,4 +1,4 @@
-# 📚 Librería — JDBC con patrón MVC + DAO
+#  Librería — JDBC con patrón MVC + DAO
 
 Aplicación de consola en **Java 21** que gestiona los libros de una librería guardados en **MySQL**, usando **JDBC** puro y una arquitectura **MVC con DAO**.
 
@@ -6,7 +6,7 @@ Proyecto de práctica de la formación de desarrollo de software en **Campusland
 
 ---
 
-## ✨ Funcionalidades
+##  Funcionalidades
 
 - **Registrar** un libro (título, autor y precio).
 - **Listar** todos los libros, ordenados por id.
@@ -15,7 +15,7 @@ Proyecto de práctica de la formación de desarrollo de software en **Campusland
 
 ---
 
-## 🛠️ Tecnologías
+##  Tecnologías
 
 | Tecnología | Uso |
 |---|---|
@@ -29,7 +29,7 @@ Proyecto de práctica de la formación de desarrollo de software en **Campusland
 
 ---
 
-## 🏗️ Arquitectura
+##  Arquitectura
 
 El código está dividido en capas. Cada una tiene una sola responsabilidad y solo habla con la de al lado.
 
@@ -68,7 +68,7 @@ src/main/java/org/example
 
 ---
 
-## 🚀 Cómo ejecutarlo
+##  Cómo ejecutarlo
 
 ### 1. Requisitos
 
@@ -125,7 +125,7 @@ El libro sin título se rechaza en el controlador, por eso nunca llega a la base
 
 ---
 
-## 📖 Lo que aprendí
+##  Lo que aprendí
 
 - Cómo conectarse a MySQL desde Java con JDBC: driver, `Connection`, `PreparedStatement` y `ResultSet`.
 - La diferencia entre `executeUpdate()` (INSERT, UPDATE, DELETE) y `executeQuery()` (SELECT).
